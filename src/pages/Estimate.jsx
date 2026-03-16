@@ -46,9 +46,8 @@ function ProgressBar({ step }) {
       {[1, 2, 3, 4].map((s) => (
         <div key={s} className="flex items-center flex-1">
           <div
-            className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold transition-all duration-200 ${
-              s <= step ? 'bg-accent text-white' : 'bg-mid-gray text-muted'
-            }`}
+            className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold transition-all duration-200 ${s <= step ? 'bg-accent text-white' : 'bg-mid-gray text-muted'
+              }`}
           >
             {s}
           </div>
@@ -109,11 +108,10 @@ export default function Estimate() {
                         <button
                           key={t}
                           onClick={() => setType(t)}
-                          className={`p-4 rounded-card border-2 text-left transition-all duration-200 font-body font-medium text-sm ${
-                            type === t
+                          className={`p-4 rounded-card border-2 text-left transition-all duration-200 font-body font-medium text-sm ${type === t
                               ? 'border-accent bg-accent/5 text-accent'
                               : 'border-mid-gray text-navy hover:border-accent/50'
-                          }`}
+                            }`}
                         >
                           {t}
                         </button>
@@ -139,11 +137,10 @@ export default function Estimate() {
                         <button
                           key={s}
                           onClick={() => toggleService(s)}
-                          className={`p-3 rounded-card border-2 text-left transition-all duration-200 font-body text-sm ${
-                            services.includes(s)
+                          className={`p-3 rounded-card border-2 text-left transition-all duration-200 font-body text-sm ${services.includes(s)
                               ? 'border-accent bg-accent/5 text-accent'
                               : 'border-mid-gray text-navy hover:border-accent/50'
-                          }`}
+                            }`}
                         >
                           {s}
                         </button>
@@ -217,11 +214,10 @@ export default function Estimate() {
                         <button
                           key={label}
                           onClick={() => setTimeline(label)}
-                          className={`p-4 rounded-card border-2 text-left transition-all duration-200 ${
-                            timeline === label
+                          className={`p-4 rounded-card border-2 text-left transition-all duration-200 ${timeline === label
                               ? 'border-accent bg-accent/5'
                               : 'border-mid-gray hover:border-accent/50'
-                          }`}
+                            }`}
                         >
                           <p className={`font-body font-semibold text-sm ${timeline === label ? 'text-accent' : 'text-navy'}`}>
                             {label}

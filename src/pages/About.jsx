@@ -33,11 +33,11 @@ const values = [
 ]
 
 const team = [
-  { name: 'Mutsinzi Innocent', role: 'Managing Director', img: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&q=80' },
-  { name: 'Ngabo Justin', role: 'Technical Director', img: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&q=80' },
-  { name: 'Isingizwe Paccifique', role: 'Electrical Engineer', img: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400&q=80' },
-  { name: 'Ingabire Claudine', role: 'Administrator', img: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&q=80' },
-  { name: 'Uwayezu Emmanuel', role: 'Plumbing & Mechanical Engineer', img: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80' },
+  { name: 'Mutsinzi Innocent', role: 'Managing Director', img: '/images/team/Innocent.jpeg' },
+  { name: 'Ngabo Justin', role: 'Technical Director', img: '/images/team/Justin.jpeg' },
+  { name: 'Isingizwe Paccifique', role: 'Electrical Engineer', img: '/images/team/Pacifique.jpeg' },
+  { name: 'Ingabire Claudine', role: 'Administrator', img: '/images/team/Claudine.jpeg' },
+  { name: 'Uwayezu Emmanuel', role: 'Plumbing & Mechanical Engineer', img: '/images/team/Emmanuel.jpeg' },
 ]
 
 export default function About() {
@@ -146,18 +146,20 @@ export default function About() {
 
       {/* Team */}
       <section className="bg-light-gray py-16 px-6">
-        <div className="max-w-7xl mx-auto">
-          <motion.h2
+        <div className="max-w-5xl mx-auto">
+          <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
             variants={fadeUp}
             transition={{ duration: 0.3 }}
-            className="font-heading font-semibold text-navy text-2xl md:text-3xl text-center mb-10"
+            className="text-center mb-10"
           >
-            Meet Our Team
-          </motion.h2>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6">
+            <h2 className="font-heading font-bold text-navy text-2xl md:text-3xl">Meet Our Team</h2>
+            <div className="mt-3 w-12 h-1 bg-accent rounded-full mx-auto" />
+          </motion.div>
+
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-5">
             {team.map(({ name, role, img }, i) => (
               <motion.div
                 key={name}
@@ -166,13 +168,24 @@ export default function About() {
                 viewport={{ once: true }}
                 variants={fadeUp}
                 transition={{ duration: 0.3, delay: i * 0.07 }}
-                className="text-center"
+                className="group bg-white rounded-card shadow-card overflow-hidden transition-all duration-200 hover:-translate-y-1 hover:shadow-card-hover"
               >
-                <div className="mx-auto mb-4 w-24 h-24 md:w-28 md:h-28 rounded-full overflow-hidden shadow-card">
-                  <img src={img} alt={name} className="w-full h-full object-cover" />
+                {/* Portrait photo — aspect 3:4, face anchored to top */}
+                <div className="relative w-full overflow-hidden" style={{ paddingBottom: '133%' }}>
+                  <img
+                    src={img}
+                    alt={name}
+                    className="absolute inset-0 w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                  />
+                  {/* subtle gradient at bottom for text legibility */}
+                  <div className="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-black/20 to-transparent" />
                 </div>
-                <h4 className="font-heading font-bold text-navy text-sm leading-snug">{name}</h4>
-                <p className="font-body text-xs text-muted mt-1">{role}</p>
+
+                {/* Name & role */}
+                <div className="p-4 text-center">
+                  <h4 className="font-heading font-bold text-navy text-sm leading-snug">{name}</h4>
+                  <p className="font-body text-xs text-muted mt-1">{role}</p>
+                </div>
               </motion.div>
             ))}
           </div>

@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import HeroStrip from '../components/HeroStrip'
-import { MapPin, Phone, Hash, Clock, Linkedin, Facebook, Instagram, MessageCircle, CheckCircle } from 'lucide-react'
+import { MapPin, Phone, Hash, Clock, Mail, Instagram, MessageCircle, CheckCircle } from 'lucide-react'
 
 const fadeUp = { hidden: { opacity: 0, y: 16 }, visible: { opacity: 1, y: 0 } }
 
@@ -11,9 +11,29 @@ const inputCls =
 export default function Contact() {
   const [form, setForm] = useState({ name: '', email: '', phone: '', subject: '', message: '' })
   const [submitted, setSubmitted] = useState(false)
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState(false)
 
   const handleChange = (e) => setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }))
-  const handleSubmit = (e) => { e.preventDefault(); setSubmitted(true) }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    setLoading(true)
+    setError(false)
+    try {
+      const res = await fetch('https://formspree.io/f/xvzwwrrk', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({ _subject: 'New Contact Message — City Stroy Ltd', ...form }),
+      })
+      if (res.ok) setSubmitted(true)
+      else setError(true)
+    } catch {
+      setError(true)
+    } finally {
+      setLoading(false)
+    }
+  }
 
   return (
     <>
@@ -63,8 +83,13 @@ export default function Contact() {
                     <label className="font-body text-sm text-navy mb-1 block">Message <span className="text-red-500">*</span></label>
                     <textarea name="message" rows={5} required placeholder="Tell us about your project or inquiry…" value={form.message} onChange={handleChange} className={`${inputCls} resize-none`} />
                   </div>
-                  <button type="submit" className="w-full py-3 bg-accent text-white font-medium rounded-btn transition-all duration-200 hover:bg-blue-700">
-                    Send Message
+                  {error && (
+                    <p className="font-body text-sm text-red-500">
+                      Something went wrong. Please try again or contact us directly.
+                    </p>
+                  )}
+                  <button type="submit" disabled={loading} className="w-full py-3 bg-accent text-white font-medium rounded-btn transition-all duration-200 hover:bg-blue-700 disabled:opacity-60 disabled:cursor-not-allowed">
+                    {loading ? 'Sending…' : 'Send Message'}
                   </button>
                 </motion.form>
               ) : (
@@ -115,14 +140,15 @@ export default function Contact() {
                 <p className="font-body text-xs text-muted mb-3">Follow us</p>
                 <div className="flex gap-4">
                   {[
-                    { Icon: Linkedin, label: 'LinkedIn' },
-                    { Icon: Facebook, label: 'Facebook' },
-                    { Icon: Instagram, label: 'Instagram' },
-                    { Icon: MessageCircle, label: 'WhatsApp' },
-                  ].map(({ Icon, label }) => (
+                    { Icon: Mail,          label: 'Email',     href: 'mailto:citystroylimited57@gmail.com' },
+                    { Icon: Instagram,     label: 'Instagram', href: 'https://www.instagram.com/city_stroy_ltd?igsh=MXU2ajl2bDB0bHJqeg%3D%3D&utm_source=qr' },
+                    { Icon: MessageCircle, label: 'WhatsApp',  href: 'https://wa.me/250784550282' },
+                  ].map(({ Icon, label, href }) => (
                     <a
                       key={label}
-                      href="#"
+                      href={href}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       aria-label={label}
                       className="w-9 h-9 rounded-full bg-white shadow-card flex items-center justify-center text-muted hover:text-accent transition-colors duration-200"
                     >

@@ -26,15 +26,42 @@ export default function BookAppointment() {
     date: '', time: '', description: '', file: null,
   })
   const [submitted, setSubmitted] = useState(false)
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState(false)
 
   const handleChange = (e) => {
     const { name, value, files } = e.target
     setForm((prev) => ({ ...prev, [name]: files ? files[0] : value }))
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    setSubmitted(true)
+    setLoading(true)
+    setError(false)
+    const data = new FormData()
+    data.append('_subject', 'New Consultation Request — City Stroy Ltd')
+    data.append('name', form.name)
+    data.append('phone', form.phone)
+    data.append('email', form.email)
+    data.append('company', form.company)
+    data.append('projectType', form.projectType)
+    data.append('date', form.date)
+    data.append('time', form.time)
+    data.append('description', form.description)
+    if (form.file) data.append('file', form.file)
+    try {
+      const res = await fetch('https://formspree.io/f/xvzwwrrk', {
+        method: 'POST',
+        headers: { Accept: 'application/json' },
+        body: data,
+      })
+      if (res.ok) setSubmitted(true)
+      else setError(true)
+    } catch {
+      setError(true)
+    } finally {
+      setLoading(false)
+    }
   }
 
   return (
@@ -191,11 +218,17 @@ export default function BookAppointment() {
                   />
                 </div>
 
+                {error && (
+                  <p className="font-body text-sm text-red-500 text-center">
+                    Something went wrong. Please try again or call us directly.
+                  </p>
+                )}
                 <button
                   type="submit"
-                  className="w-full py-3 bg-accent text-white font-medium rounded-btn transition-all duration-200 hover:bg-blue-700"
+                  disabled={loading}
+                  className="w-full py-3 bg-accent text-white font-medium rounded-btn transition-all duration-200 hover:bg-blue-700 disabled:opacity-60 disabled:cursor-not-allowed"
                 >
-                  Send Request
+                  {loading ? 'Sending…' : 'Send Request'}
                 </button>
               </motion.form>
             ) : (

@@ -63,11 +63,10 @@ export default function Projects() {
             <button
               key={cat}
               onClick={() => setActive(cat)}
-              className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all duration-200 ${
-                active === cat
+              className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all duration-200 ${active === cat
                   ? 'bg-accent text-white'
                   : 'bg-light-gray text-navy hover:bg-mid-gray'
-              }`}
+                }`}
             >
               {cat}
             </button>

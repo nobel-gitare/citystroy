@@ -11,8 +11,8 @@ export default {
         'mid-gray': '#DEE2E6',
       },
       fontFamily: {
-        heading: ['"Plus Jakarta Sans"', 'sans-serif'],
-        body: ['Inter', 'sans-serif'],
+        heading: ['"Playfair Display"', 'Georgia', 'serif'],
+        body: ['"DM Sans"', 'system-ui', 'sans-serif'],
       },
       borderRadius: {
         card: '12px',

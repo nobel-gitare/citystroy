@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { MapPin, Phone, Hash, Linkedin, Facebook, Instagram, MessageCircle } from 'lucide-react'
+import { MapPin, Phone, Hash, Mail, Instagram, MessageCircle } from 'lucide-react'
 
 const quickLinks = [
   { label: 'Home', to: '/' },
@@ -24,14 +24,21 @@ export default function Footer() {
     <footer className="bg-navy text-white">
       <div className="max-w-7xl mx-auto px-6 py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {/* Column 1 */}
+
+          {/* Column 1 — Logo + tagline */}
           <div>
-            <div className="flex items-center gap-2 mb-4">
-              <div className="w-8 h-8 rounded-btn bg-accent flex items-center justify-center shrink-0">
-                <span className="text-white font-heading font-bold text-sm">CS</span>
-              </div>
-              <span className="font-heading font-bold text-white text-lg">City Stroy Ltd</span>
-            </div>
+            <Link to="/" className="inline-block mb-4">
+              <img
+                src="/logo.png"
+                alt="City Stroy Ltd"
+                style={{
+                  height: '48px',
+                  width: 'auto',
+                  objectFit: 'contain',
+                  filter: 'brightness(0) invert(1)',
+                }}
+              />
+            </Link>
             <p className="text-sm text-white/70 mb-2 font-body leading-relaxed">
               "Let's Build the Future Together!"
             </p>
@@ -39,14 +46,15 @@ export default function Footer() {
 
             <div className="flex gap-4 mt-6">
               {[
-                { Icon: Linkedin, label: 'LinkedIn' },
-                { Icon: Facebook, label: 'Facebook' },
-                { Icon: Instagram, label: 'Instagram' },
-                { Icon: MessageCircle, label: 'WhatsApp' },
-              ].map(({ Icon, label }) => (
+                { Icon: Mail,          label: 'Email',     href: 'mailto:citystroylimited57@gmail.com' },
+                { Icon: Instagram,     label: 'Instagram', href: 'https://www.instagram.com/city_stroy_ltd?igsh=MXU2ajl2bDB0bHJqeg%3D%3D&utm_source=qr' },
+                { Icon: MessageCircle, label: 'WhatsApp',  href: 'https://wa.me/250784550282' },
+              ].map(({ Icon, label, href }) => (
                 <a
                   key={label}
-                  href="#"
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   aria-label={label}
                   className="text-white/50 hover:text-accent transition-colors duration-200"
                 >
@@ -56,7 +64,7 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Column 2 */}
+          {/* Column 2 — Quick Links */}
           <div>
             <h4 className="font-heading font-semibold text-white mb-4">Quick Links</h4>
             <ul className="space-y-2">
@@ -73,7 +81,7 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Column 3 */}
+          {/* Column 3 — Services */}
           <div>
             <h4 className="font-heading font-semibold text-white mb-4">Our Services</h4>
             <ul className="space-y-2">
@@ -90,7 +98,7 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Column 4 */}
+          {/* Column 4 — Contact */}
           <div>
             <h4 className="font-heading font-semibold text-white mb-4">Contact</h4>
             <ul className="space-y-3">

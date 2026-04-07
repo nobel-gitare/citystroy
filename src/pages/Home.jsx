@@ -70,6 +70,7 @@ const featuredProjects = [
   { id: 1, name: 'APARWA House', location: 'Gisozi, Kigali', category: 'Institutional', scope: 'Plumbing & Mechanical Systems', image: '/images/projects/Aparwa/APARWA_1.jpeg' },
   { id: 2, name: 'Rubis Gisenyi Fuel Station', location: 'Gisenyi, Rwanda', category: 'Commercial', scope: 'Construction & MEP Works', image: '/images/projects/Rubis Gisenyi Station/Rubis1.jpeg' },
   { id: 3, name: 'Apartment Building — NDANGA SEZIRAHIGA Emmanuel', location: 'Kigali, Rwanda', category: 'Residential', scope: 'Plumbing & Mechanical Works', image: '/images/projects/Apartment building/ndanga1.jpeg' },
+  { id: 4, name: 'Yellowstone Development', location: 'Kigali, Rwanda', category: 'Residential', scope: 'Construction, Electrical & Plumbing Works', image: '/images/projects/Yellowstone/Yellowstone_1 - Photo.jpg' },
 ]
 
 const partners = ['Blue Fox Company', 'City of Kigali', 'Rwanda Dev. Board', 'Ministry of Infra.', 'REG Rwanda']
@@ -85,7 +86,7 @@ export default function Home() {
         className="relative -mt-16 min-h-screen flex flex-col justify-center items-center text-center px-6"
         style={{
           backgroundImage: `linear-gradient(to bottom, rgba(27,42,74,0.82) 0%, rgba(27,42,74,0.45) 55%, rgba(27,42,74,0.72) 100%),
-            url('https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1600&q=80')`,
+            url('/images/projects/Yellowstone/Yellowstone_1 - Photo.jpg')`,
           backgroundSize: 'cover', backgroundPosition: 'center',
         }}
       >
@@ -203,7 +204,7 @@ export default function Home() {
             </button>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {featuredProjects.map(({ id, name, location, category, scope, image }, i) => (
               <motion.div
                 key={id} initial="hidden" whileInView="visible" viewport={{ once: true }}

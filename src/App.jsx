@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
+import { LanguageProvider } from './context/LanguageContext'
 import { useEffect } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import Navbar from './components/Navbar'
@@ -60,11 +61,13 @@ function Layout({ children }) {
 
 export default function App() {
   return (
-    <BrowserRouter>
-      <ScrollToTop />
-      <Layout>
-        <AnimatedRoutes />
-      </Layout>
-    </BrowserRouter>
+    <LanguageProvider>
+      <BrowserRouter>
+        <ScrollToTop />
+        <Layout>
+          <AnimatedRoutes />
+        </Layout>
+      </BrowserRouter>
+    </LanguageProvider>
   )
 }

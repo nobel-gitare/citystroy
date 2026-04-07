@@ -1,13 +1,14 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { MessageCircle } from 'lucide-react'
+import { useLanguage } from '../context/LanguageContext'
 
 export default function WhatsAppButton() {
   const [hovered, setHovered] = useState(false)
+  const { t } = useLanguage()
 
   return (
     <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-2">
-      {/* Tooltip */}
       <AnimatePresence>
         {hovered && (
           <motion.div
@@ -17,13 +18,12 @@ export default function WhatsAppButton() {
             transition={{ duration: 0.15 }}
             className="bg-white rounded-card shadow-card-hover px-4 py-2.5 text-right pointer-events-none"
           >
-            <p className="font-heading font-semibold text-navy text-sm">Chat with us</p>
+            <p className="font-heading font-semibold text-navy text-sm">{t.whatsapp.chat}</p>
             <p className="font-body text-muted text-xs mt-0.5">+250 784 550 282</p>
           </motion.div>
         )}
       </AnimatePresence>
 
-      {/* Button */}
       <motion.a
         href="https://wa.me/250784550282"
         target="_blank"
@@ -39,11 +39,7 @@ export default function WhatsAppButton() {
         style={{ backgroundColor: '#25D366' }}
         aria-label="Chat on WhatsApp"
       >
-        {/* Pulse ring */}
-        <span
-          className="absolute inset-0 rounded-full animate-ping opacity-30"
-          style={{ backgroundColor: '#25D366' }}
-        />
+        <span className="absolute inset-0 rounded-full animate-ping opacity-30" style={{ backgroundColor: '#25D366' }} />
         <MessageCircle size={26} className="text-white relative z-10" fill="white" />
       </motion.a>
     </div>
